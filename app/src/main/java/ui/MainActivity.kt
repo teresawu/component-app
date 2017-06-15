@@ -11,7 +11,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         viewModelBtn.setOnClickListener({ v -> startActivity(Intent(MainActivity@ this, ViewModelActivity::class.java)) })
-        liveDataBtn.setOnClickListener({ v -> startActivity(Intent(MainActivity@ this, LiveDataActivity::class.java)) })
         roomBtn.setOnClickListener({ v -> startActivity(Intent(MainActivity@ this, RoomActivity::class.java)) })
     }
 }

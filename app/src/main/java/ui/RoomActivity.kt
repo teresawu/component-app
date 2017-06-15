@@ -1,14 +1,35 @@
 package ui
 
+import data.BorrowModel
+import data.BorrowedListViewModel
+import android.arch.lifecycle.LifecycleActivity
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-
+import android.support.v7.widget.LinearLayoutManager
+import android.view.View
+import kotlinx.android.synthetic.main.activity_room.*
+import java.util.ArrayList
 import test.com.componentapp.R
 
-class RoomActivity : AppCompatActivity() {
+class RoomActivity : LifecycleActivity(), View.OnLongClickListener {
+
+    private var viewModel: BorrowedListViewModel? = null
+    private var recyclerViewAdapter: AppAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_room)
+        setContentView(R.layout.activity_viewmodel)
+        recyclerViewAdapter = AppAdapter(ArrayList<BorrowModel>(), this)
+        recyclerView!!.layoutManager = LinearLayoutManager(this)
+        recyclerView!!.adapter = recyclerViewAdapter
+        viewModel = ViewModelProviders.of(this).get(BorrowedListViewModel::class.java)
+        viewModel!!.itemAndPersonList.observe(this@RoomActivity, Observer<List<BorrowModel>> { itemAndPeople -> recyclerViewAdapter!!.addItem(itemAndPeople!!) })
+    }
+
+    override fun onLongClick(v: View): Boolean {
+        val borrowModel = v.tag as BorrowModel
+        viewModel!!.deleteItem(borrowModel)
+        return true
     }
 }

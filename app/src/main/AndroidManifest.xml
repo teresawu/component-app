@@ -17,9 +17,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="ui.ViewModelActivity"/>
         <activity android:name="ui.RoomActivity"/>
-        <activity android:name="ui.LiveDataActivity"/>
     </application>
 
 </manifest>
