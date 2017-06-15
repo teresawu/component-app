@@ -3,7 +3,7 @@ package data
 import android.arch.persistence.room.Database
 import android.arch.persistence.room.Room
 import android.arch.persistence.room.RoomDatabase
-import android.content.Context//@Database(entities = {BorrowModel.class}, version = 1)
+import android.content.Context
 
 @Database(entities = arrayOf(BorrowModel::class), version = 1)
 abstract class AppDatabase : RoomDatabase() {

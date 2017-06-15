@@ -1,14 +1,17 @@
 package data
 
+import android.arch.persistence.room.ColumnInfo
 import android.arch.persistence.room.Entity
 import android.arch.persistence.room.PrimaryKey
 import android.arch.persistence.room.TypeConverters
 
 import java.util.Date
 
-@Entity //defines the database table
-data class BorrowModel(@PrimaryKey(autoGenerate = true) var id: Int,
-                       @TypeConverters(DateConverter::class) val borrowDate: Date,
-                       val itemName: String, val personName: String)
+@Entity(tableName = "borrow_db")
+class BorrowModel(@ColumnInfo(name = "id") @PrimaryKey(autoGenerate = false) var id: Int = 0,
+                  @ColumnInfo(name = "item_name") var itemName: String = "",
+                  @ColumnInfo(name = "person_name") var personName: String = "")
 
-//SQL cannot store Date by default, so we need to convert it
+
+//class BorrowModel(@PrimaryKey var id: Int, val itemName: String, val personName: String)
+
